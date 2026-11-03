@@ -1,0 +1,7 @@
+{
+  "_comment": "Expected verdicts per alert. A list means any of those verdicts is acceptable.",
+  "GD-7f3a91": ["true_positive"],
+  "SPL-20261027-0412": ["false_positive"],
+  "SPL-20261027-0519": ["true_positive", "needs_human"],
+  "CS-ldt-88f1c2": ["true_positive", "needs_human"]
+}

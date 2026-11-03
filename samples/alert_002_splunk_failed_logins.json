@@ -1,0 +1,16 @@
+{
+  "alert_id": "SPL-20261027-0412",
+  "source": "splunk",
+  "title": "Multiple failed logins followed by success",
+  "description": "User jdoe had 6 failed login attempts followed by a successful login within 5 minutes.",
+  "severity": "medium",
+  "timestamp": "2026-10-27T14:10:05Z",
+  "entities": {"hosts": ["LAPTOP-JDOE"], "users": ["jdoe"], "ips": ["10.20.5.14"], "domains": []},
+  "raw": {
+    "search_name": "Brute Force - Failed Then Success",
+    "count_failed": 6,
+    "count_success": 1,
+    "src_ip": "10.20.5.14",
+    "app": "azure_ad"
+  }
+}

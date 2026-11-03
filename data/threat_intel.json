@@ -1,0 +1,12 @@
+{
+  "ips": {
+    "185.220.101.47": {"risk_score": 92, "category": "c2_infrastructure", "first_seen": "2026-09-30", "sources": ["internal_feed", "abuse_reports"], "notes": "Associated with a commodity botnet C2 cluster."},
+    "198.51.100.23": {"risk_score": 88, "category": "c2_infrastructure", "first_seen": "2026-10-19", "sources": ["vendor_feed"], "notes": "HTTPS C2 used by a loader family seen in recent intrusions."},
+    "203.0.113.77": {"risk_score": 65, "category": "scanner", "first_seen": "2026-08-02", "sources": ["abuse_reports"], "notes": "Probes web applications across many organizations. Not tied to a known actor."},
+    "10.20.5.14": {"risk_score": 0, "category": "internal_vpn_pool", "notes": "Corporate VPN address range."}
+  },
+  "domains": {
+    "update-cdn-sync.xyz": {"risk_score": 95, "category": "c2_domain", "registered": "2026-10-20", "notes": "Newly registered, DGA-like naming, resolves to known C2 infrastructure."},
+    "telemetry-ms-update.top": {"risk_score": 90, "category": "c2_domain", "registered": "2026-10-18", "notes": "Impersonates Microsoft telemetry. Not owned by Microsoft."}
+  }
+}

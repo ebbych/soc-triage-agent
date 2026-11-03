@@ -1,0 +1,4 @@
+{
+  "jdoe": {"department": "Finance", "title": "Financial Analyst", "mfa_enrolled": true, "manager": "asmith", "criticality": "medium"},
+  "svc-adsync": {"department": "IT", "title": "Directory sync service account", "mfa_enrolled": false, "criticality": "critical"}
+}

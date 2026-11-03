@@ -1,0 +1,15 @@
+{
+  "alert_id": "CS-ldt-88f1c2",
+  "source": "crowdstrike_falcon",
+  "title": "Suspicious DNS beaconing from domain controller",
+  "description": "Periodic DNS beacon pattern and outbound HTTPS from rundll32.exe on a domain controller, consistent with command and control.",
+  "severity": "critical",
+  "timestamp": "2026-10-27T09:15:22Z",
+  "entities": {"hosts": ["dc01"], "users": [], "ips": ["198.51.100.23"], "domains": ["telemetry-ms-update.top"]},
+  "raw": {
+    "process": "C:\\Windows\\System32\\rundll32.exe",
+    "parent_process": "C:\\Windows\\System32\\svchost.exe",
+    "tactic": "Command and Control",
+    "beacon_interval_seconds": 300
+  }
+}
