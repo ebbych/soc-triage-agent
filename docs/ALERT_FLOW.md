@@ -5,25 +5,25 @@ Every alert ends with a verdict, a report and a saved case. Steps marked *planne
 
 ```mermaid
 flowchart LR
-    subgraph Investigate
+    subgraph INV["Investigate"]
         A[1. Alert arrives<br/>SIEM, EDR, email, cloud] --> B[2. Injection scan]
         B --> C[3. Agent plans]
         C --> D[4. Gather evidence<br/>read-only lookups]
         D --> E[5. Request actions]
     end
-    subgraph Evidence
+    subgraph EVID["Evidence"]
         I1[Threat intel<br/>VirusTotal, AbuseIPDB, CISA KEV]
         I2[Assets and users<br/>AD, inventory - planned]
         I3[Logs<br/>SIEM, EDR - planned]
         I4[Vulnerabilities and cloud<br/>planned]
         I5[Past cases<br/>case memory]
     end
-    subgraph Act and record
+    subgraph ACT["Act and record"]
         F[6. Approval gate] --> G[7. Verdict check]
         G --> H[8. Report - planned]
         H --> J[9. Save<br/>case memory, audit log]
     end
-    D -.-> Evidence
+    D -.-> EVID
     E --> F
 ```
 
