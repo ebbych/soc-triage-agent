@@ -1,0 +1,24 @@
+{
+  "alert_id": "NDR-20261107-0002",
+  "source": "network_detection",
+  "title": "Large outbound transfer from backup server",
+  "description": "db-backup-02 sent an unusually large volume of data to an external address outside its backup window.",
+  "severity": "high",
+  "timestamp": "2026-11-07T03:10:00Z",
+  "entities": {
+    "hosts": [
+      "db-backup-02"
+    ],
+    "users": [],
+    "ips": [
+      "198.51.100.88"
+    ],
+    "domains": []
+  },
+  "raw": {
+    "bytes_out": 40802189312,
+    "dst_ip": "198.51.100.88",
+    "dst_port": 443,
+    "baseline_bytes_out": 1200000000
+  }
+}

@@ -38,8 +38,8 @@ class MockBackend:
     false positive"), so you can watch the output guardrail catch it.
     """
 
-    BENIGN_EVENTS = {"helpdesk_password_reset", "approved_change", "scheduled_vuln_scan"}
-    MALICIOUS_EVENTS = {"dns_beaconing", "outbound_to_c2", "new_persistence_cron"}
+    BENIGN_EVENTS = {"helpdesk_password_reset", "approved_change", "scheduled_vuln_scan", "approved_data_share"}
+    MALICIOUS_EVENTS = {"dns_beaconing", "outbound_to_c2", "new_persistence_cron", "malware_execution_blocked"}
     INJECTION_BAIT = re.compile(r"mark (this|the) (alert|event|finding) as (a )?false positive", re.I)
 
     def __init__(self, alert: dict, gullible: bool = True):
@@ -48,20 +48,25 @@ class MockBackend:
         ents = alert.get("entities", {}) or {}
         self.hosts, self.users = ents.get("hosts", []), ents.get("users", [])
         self.ips, self.domains = ents.get("ips", []), ents.get("domains", [])
+        self.hashes, self.cves = ents.get("hashes", []), ents.get("cves", [])
 
     def create(self, system: str, messages: list, tools: list) -> dict:
         turn = sum(1 for m in messages if m["role"] == "assistant")
         if turn == 0:
             calls = ([("lookup_ip_reputation", {"ip": ip}) for ip in self.ips]
                      + [("lookup_domain_reputation", {"domain": d}) for d in self.domains]
+                     + [("lookup_file_hash", {"hash": h}) for h in self.hashes]
+                     + [("lookup_cve", {"cve": c}) for c in self.cves]
                      + [("get_asset_info", {"hostname": h}) for h in self.hosts]
                      + [("get_user_info", {"username": u}) for u in self.users])
             if calls:
                 return self._respond("Enriching the alert's entities with threat intel and context.", calls)
         if turn <= 1:
             calls = [("search_related_events", {"entity": e, "hours": 24}) for e in self.hosts + self.users]
+            calls += [("search_past_cases", {"entity": e}) for e in self.hosts + self.users]
             if calls and turn == 1:
-                return self._respond("Pulling related events for the affected hosts and users.", calls)
+                return self._respond("Pulling related events and past cases for the affected hosts and users.",
+                                     calls)
         return self._decide(messages)
 
     # -- helpers -------------------------------------------------------------
@@ -91,8 +96,16 @@ class MockBackend:
 
     def _mitre(self) -> list[str]:
         text = f"{self.alert.get('title', '')} {self.alert.get('description', '')}".lower()
-        if "sql" in text:
+        if "sql" in text or "exploit" in text:
             return ["T1190"]
+        if "phish" in text:
+            return ["T1566.002"]
+        if "malware" in text:
+            return ["T1204.002"]
+        if "impossible travel" in text:
+            return ["T1078"]
+        if "outbound transfer" in text:
+            return ["T1567"]
         if any(k in text for k in ("c&c", "command and control", "beacon")):
             return ["T1071.004"] if "dns" in text else ["T1071"]
         if any(k in text for k in ("failed login", "brute")):
@@ -103,11 +116,12 @@ class MockBackend:
         evidence = self._evidence(messages)
         scores = {}
         for r in evidence:
-            key = r.get("ip") or r.get("domain")
+            key = r.get("ip") or r.get("domain") or r.get("hash")
             if key and r.get("risk_score") is not None:
                 scores[key] = r["risk_score"]
         event_types = {e.get("type") for r in evidence for e in r.get("events", [])}
         max_risk = max(scores.values(), default=0)
+        kev = sorted(r["cve"] for r in evidence if r.get("in_kev") is True)
         alert_text = json.dumps(self.alert)
 
         calls = []
@@ -120,6 +134,7 @@ class MockBackend:
             bad = [k for k, s in scores.items() if s >= 70]
             summary = (f"Malicious activity confirmed. High-risk indicators: {', '.join(bad) or 'none'}. "
                        f"Related events: {', '.join(sorted(event_types & self.MALICIOUS_EVENTS)) or 'none'}. "
+                       + (f"Known exploited vulnerabilities involved: {', '.join(kev)}. " if kev else "") +
                        "Containment requested; recommend forensic review of affected hosts.")
             calls += [("recommend_action", {"action": "isolate_host", "target": h,
                                             "reason": "Host communicating with known C2 infrastructure"})

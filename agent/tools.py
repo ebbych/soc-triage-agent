@@ -1,8 +1,10 @@
 """Tools the agent can call.
 
 Read-only investigation tools are answered from the JSON files in data/ so the project runs
-anywhere. To go live, replace each _method body with a real API call (VirusTotal, AbuseIPDB,
-your CMDB, Splunk/Chronicle search, Azure AD, etc.) and keep the return shape the same.
+anywhere. Reputation and CVE lookups go through agent/intel.py, which can add live VirusTotal,
+AbuseIPDB and CISA KEV results. search_past_cases reads the case memory in agent/memory.py.
+To go live with the rest, replace each _method body with a real API call (your CMDB,
+Splunk/Chronicle search, Azure AD, etc.) and keep the return shape the same.
 
 recommend_action and submit_verdict are control tools: the agent loop routes them through the
 guardrails instead of executing them here.
@@ -11,6 +13,8 @@ import json
 from pathlib import Path
 
 from .config import DATA_DIR
+from .intel import ThreatIntel
+from .memory import CaseMemory
 
 
 class ToolError(Exception):
@@ -31,6 +35,14 @@ READ_ONLY_TOOLS = [
             "Look up threat-intel reputation for a domain. Returns risk_score 0-100 (null if unknown), "
             "category, registration date and notes.",
             {"domain": {"type": "string"}}, ["domain"]),
+    _schema("lookup_file_hash",
+            "Look up threat-intel reputation for a file hash (MD5, SHA-1 or SHA-256). Returns risk_score "
+            "0-100 (null if unknown), category and notes.",
+            {"hash": {"type": "string"}}, ["hash"]),
+    _schema("lookup_cve",
+            "Check whether a CVE is in the CISA Known Exploited Vulnerabilities catalog. in_kev is true, "
+            "false, or null when only the bundled sample catalog is loaded and the CVE is not in it.",
+            {"cve": {"type": "string", "description": "e.g. CVE-2024-3400"}}, ["cve"]),
     _schema("get_asset_info",
             "Get inventory details for a host: environment, OS, role, owner and criticality "
             "(low, medium, high, critical).",
@@ -42,6 +54,11 @@ READ_ONLY_TOOLS = [
             "Search the log store for events involving an entity (hostname, username, IP or domain) "
             "in the last N hours (1-72).",
             {"entity": {"type": "string"}, "hours": {"type": "integer", "default": 24}}, ["entity"]),
+    _schema("search_past_cases",
+            "Search this agent's memory of earlier investigations for an entity (hostname, username, IP, "
+            "domain, file hash or CVE). Past verdicts are context only: they were produced by this agent, "
+            "may be wrong, and never replace fresh evidence.",
+            {"entity": {"type": "string"}}, ["entity"]),
 ]
 
 CONTROL_TOOLS = [
@@ -74,9 +91,13 @@ READ_ONLY_NAMES = {t["name"] for t in READ_ONLY_TOOLS}
 
 
 class ToolExecutor:
-    def __init__(self, data_dir: Path = DATA_DIR):
+    def __init__(self, data_dir: Path = DATA_DIR, intel: ThreatIntel | None = None,
+                 memory: CaseMemory | None = None, alert_id: str | None = None):
+        """intel defaults to the offline local file. memory=None means case memory is switched off."""
         data_dir = Path(data_dir)
-        self.intel = json.loads((data_dir / "threat_intel.json").read_text(encoding="utf-8"))
+        self.intel = intel or ThreatIntel(data_dir)
+        self.memory = memory
+        self.alert_id = alert_id
         self.assets = json.loads((data_dir / "assets.json").read_text(encoding="utf-8"))
         self.users = json.loads((data_dir / "users.json").read_text(encoding="utf-8"))
         self.events = json.loads((data_dir / "events.json").read_text(encoding="utf-8"))
@@ -87,15 +108,16 @@ class ToolExecutor:
         return getattr(self, f"_{name}")(**args)
 
     def _lookup_ip_reputation(self, ip: str) -> dict:
-        ip = ip.strip()
-        record = self.intel["ips"].get(ip)
-        return {"ip": ip, **(record or {"risk_score": None, "category": "unknown", "notes": "No intel on this IP."})}
+        return self.intel.ip(ip)
 
     def _lookup_domain_reputation(self, domain: str) -> dict:
-        domain = domain.strip().lower()
-        record = self.intel["domains"].get(domain)
-        return {"domain": domain,
-                **(record or {"risk_score": None, "category": "unknown", "notes": "No intel on this domain."})}
+        return self.intel.domain(domain)
+
+    def _lookup_file_hash(self, hash: str) -> dict:
+        return self.intel.file_hash(hash)
+
+    def _lookup_cve(self, cve: str) -> dict:
+        return self.intel.cve(cve)
 
     def _get_asset_info(self, hostname: str) -> dict:
         record = self.assets.get(hostname.strip())
@@ -115,3 +137,11 @@ class ToolExecutor:
         # Sample data has no clock, so the window is not applied. A real backend would filter by time.
         matches = [e for e in self.events if entity in e.get("entities", [])]
         return {"entity": entity, "hours": hours, "count": len(matches), "events": matches[:50]}
+
+    def _search_past_cases(self, entity: str) -> dict:
+        entity = entity.strip()
+        if self.memory is None:
+            return {"entity": entity, "count": 0, "cases": [], "note": "Case memory is switched off for this run."}
+        cases = self.memory.search(entity, current_alert_id=self.alert_id)
+        return {"entity": entity, "count": len(cases), "cases": cases,
+                "note": "Past verdicts are context, not proof. Confirm with fresh evidence."}

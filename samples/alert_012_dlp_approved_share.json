@@ -1,0 +1,25 @@
+{
+  "alert_id": "PV-dlp-20261109-014",
+  "source": "microsoft_purview",
+  "title": "Sensitive document shared with external domain",
+  "description": "A file labeled Confidential-Finance was emailed to a recipient outside the organization.",
+  "severity": "medium",
+  "timestamp": "2026-11-09T16:31:00Z",
+  "entities": {
+    "hosts": [],
+    "users": [
+      "rlopez"
+    ],
+    "ips": [],
+    "domains": [
+      "hartwell-audit.com"
+    ]
+  },
+  "raw": {
+    "policy": "Financial data to external recipients",
+    "file_name": "FY2026_audit_package.xlsx",
+    "sensitivity_label": "Confidential-Finance",
+    "recipient_domain": "hartwell-audit.com",
+    "action": "audited"
+  }
+}

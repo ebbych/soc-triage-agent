@@ -13,11 +13,17 @@ from pathlib import Path
 from .agent import triage
 from .backends import AnthropicBackend, MockBackend
 from .guardrails import approve_all, deny_all, interactive_approver
+from .intel import ThreatIntel
+from .memory import CaseMemory
+from .tools import ToolExecutor
 
 
 TOOL_LABELS = {
     "lookup_ip_reputation": ("Checking IP reputation", "ip"),
     "lookup_domain_reputation": ("Checking domain reputation", "domain"),
+    "lookup_file_hash": ("Checking file hash reputation", "hash"),
+    "lookup_cve": ("Checking known-exploited status of", "cve"),
+    "search_past_cases": ("Searching past cases for", "entity"),
     "get_asset_info": ("Looking up asset", "hostname"),
     "get_user_info": ("Looking up user", "username"),
     "search_related_events": ("Searching related events for", "entity"),
@@ -90,6 +96,10 @@ def main(argv=None) -> int:
                         help="How to answer approval requests for high-risk actions (default: ask)")
     parser.add_argument("--json", action="store_true", help="Print the raw result as JSON")
     parser.add_argument("--quiet", action="store_true", help="Hide the live progress lines")
+    parser.add_argument("--no-memory", action="store_true",
+                        help="Do not read or write the case memory for this run")
+    parser.add_argument("--no-live-intel", action="store_true",
+                        help="Use only the local threat-intel file, even if provider API keys are set")
     args = parser.parse_args(argv)
 
     alert = json.loads(Path(args.alert).read_text(encoding="utf-8"))
@@ -97,7 +107,14 @@ def main(argv=None) -> int:
     approver = {"ask": interactive_approver, "all": approve_all, "none": deny_all}[args.approve]
     progress = None if args.quiet else make_progress_printer()
 
-    result = triage(alert, backend, approver, progress=progress)
+    # Live intel providers are only used with the real model; --mock stays fully offline.
+    intel = ThreatIntel.from_env(live=not args.mock and not args.no_live_intel)
+    memory = None if args.no_memory else CaseMemory()
+    if progress:
+        print(f"Threat intel: {', '.join(intel.provider_names)} | case memory: "
+              f"{'off' if memory is None else f'{memory.count()} past case(s)'}", file=sys.stderr, flush=True)
+
+    result = triage(alert, backend, approver, executor=ToolExecutor(intel=intel), progress=progress, memory=memory)
     if args.json:
         print(json.dumps(result, indent=2))
     else:

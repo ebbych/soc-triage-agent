@@ -1,0 +1,24 @@
+{
+  "alert_id": "IDS-20261104-0007",
+  "source": "network_ids",
+  "title": "Internal port scan detected",
+  "description": "One internal host connected to more than 4,000 ports across 212 hosts in 70 minutes.",
+  "severity": "medium",
+  "timestamp": "2026-11-04T03:11:00Z",
+  "entities": {
+    "hosts": [
+      "vulnscan-01"
+    ],
+    "users": [],
+    "ips": [
+      "10.20.9.50"
+    ],
+    "domains": []
+  },
+  "raw": {
+    "src_ip": "10.20.9.50",
+    "distinct_hosts": 212,
+    "distinct_ports": 4096,
+    "signature": "ET SCAN Nmap-style sweep"
+  }
+}
