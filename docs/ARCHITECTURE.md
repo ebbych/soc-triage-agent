@@ -6,6 +6,8 @@ not exploit anything.
 
 For the step-by-step path of a single alert, see [ALERT_FLOW.md](ALERT_FLOW.md).
 
+![Whiteboard: architecture, guardrails and roadmap](images/whiteboard-architecture.svg)
+
 ## Target design
 
 ```mermaid

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-40 -30 1484 798" font-family="Helvetica, Arial, sans-serif" fill="#22211e">
+<rect x="-40" y="-30" width="1484" height="798" fill="#ffffff"/>
+<defs><marker id="ah" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#3b3a36"/></marker></defs>
+<rect x="0" y="200" width="1404" height="148" rx="18" fill="#fafaf7" stroke="#c9c7bf" stroke-width="1.5"/>
+<text x="4" y="190" font-size="16" font-weight="700" fill="#55534d">Investigate</text>
+<rect x="0" y="400" width="1404" height="138" rx="18" fill="#fafaf7" stroke="#c9c7bf" stroke-width="1.5"/>
+<text x="4" y="390" font-size="16" font-weight="700" fill="#55534d">Evidence it gathers</text>
+<rect x="0" y="590" width="1404" height="148" rx="18" fill="#fafaf7" stroke="#c9c7bf" stroke-width="1.5"/>
+<text x="4" y="580" font-size="16" font-weight="700" fill="#55534d">Act and record</text>
+<text x="0" y="46" font-size="46" font-weight="700">How the agent handles an alert</text>
+<text x="0" y="102" font-size="26">Every alert ends with a verdict, report and saved case.</text>
+<text x="0" y="142" font-size="14">Blue: agent step.  Peach: guardrail.  Green: evidence source.</text>
+<rect x="24" y="224" width="220" height="100" rx="14" fill="#cfe2f7" stroke="#7ea6d3" stroke-width="1.5"/>
+<text x="134.0" y="269.0" text-anchor="middle" font-size="15" font-weight="700">1. Alert arrives</text>
+<text x="134.0" y="289.0" text-anchor="middle" font-size="15">SIEM, EDR, email, cloud</text>
+<rect x="308" y="224" width="220" height="100" rx="14" fill="#fbd9c0" stroke="#e0a57c" stroke-width="1.5"/>
+<text x="418.0" y="259.0" text-anchor="middle" font-size="15" font-weight="700">2. Injection scan</text>
+<text x="418.0" y="279.0" text-anchor="middle" font-size="15">flags planted</text>
+<text x="418.0" y="299.0" text-anchor="middle" font-size="15">instructions</text>
+<rect x="592" y="224" width="220" height="100" rx="14" fill="#cfe2f7" stroke="#7ea6d3" stroke-width="1.5"/>
+<text x="702.0" y="269.0" text-anchor="middle" font-size="15" font-weight="700">3. Agent plans</text>
+<text x="702.0" y="289.0" text-anchor="middle" font-size="15">what to check first</text>
+<rect x="876" y="224" width="220" height="100" rx="14" fill="#cfe2f7" stroke="#7ea6d3" stroke-width="1.5"/>
+<text x="986.0" y="269.0" text-anchor="middle" font-size="15" font-weight="700">4. Gather evidence</text>
+<text x="986.0" y="289.0" text-anchor="middle" font-size="15">read-only lookups</text>
+<rect x="1160" y="224" width="220" height="100" rx="14" fill="#cfe2f7" stroke="#7ea6d3" stroke-width="1.5"/>
+<text x="1270.0" y="259.0" text-anchor="middle" font-size="15" font-weight="700">5. Request actions</text>
+<text x="1270.0" y="279.0" text-anchor="middle" font-size="15">isolate, block, disable,</text>
+<text x="1270.0" y="299.0" text-anchor="middle" font-size="15">ticket</text>
+<rect x="24" y="424" width="252" height="90" rx="14" fill="#cfe8d4" stroke="#7fb98a" stroke-width="1.5"/>
+<text x="150.0" y="454.0" text-anchor="middle" font-size="15" font-weight="700">Threat intel</text>
+<text x="150.0" y="474.0" text-anchor="middle" font-size="15">VirusTotal, AbuseIPDB, CISA</text>
+<text x="150.0" y="494.0" text-anchor="middle" font-size="15">KEV</text>
+<rect x="300" y="424" width="252" height="90" rx="14" fill="#cfe8d4" stroke="#7fb98a" stroke-width="1.5"/>
+<text x="426.0" y="464.0" text-anchor="middle" font-size="15" font-weight="700">Assets and users</text>
+<text x="426.0" y="484.0" text-anchor="middle" font-size="15">AD, inventory (planned)</text>
+<rect x="576" y="424" width="252" height="90" rx="14" fill="#cfe8d4" stroke="#7fb98a" stroke-width="1.5"/>
+<text x="702.0" y="464.0" text-anchor="middle" font-size="15" font-weight="700">Logs</text>
+<text x="702.0" y="484.0" text-anchor="middle" font-size="15">SIEM, EDR (planned)</text>
+<rect x="852" y="424" width="252" height="90" rx="14" fill="#cfe8d4" stroke="#7fb98a" stroke-width="1.5"/>
+<text x="978.0" y="464.0" text-anchor="middle" font-size="15" font-weight="700">Vulnerabilities and cloud</text>
+<text x="978.0" y="484.0" text-anchor="middle" font-size="15">scanners, Wiz (planned)</text>
+<rect x="1128" y="424" width="252" height="90" rx="14" fill="#cfe8d4" stroke="#7fb98a" stroke-width="1.5"/>
+<text x="1254.0" y="464.0" text-anchor="middle" font-size="15" font-weight="700">Past cases</text>
+<text x="1254.0" y="484.0" text-anchor="middle" font-size="15">case memory</text>
+<rect x="24" y="614" width="220" height="100" rx="14" fill="#fbd9c0" stroke="#e0a57c" stroke-width="1.5"/>
+<text x="134.0" y="649.0" text-anchor="middle" font-size="15" font-weight="700">6. Approval gate</text>
+<text x="134.0" y="669.0" text-anchor="middle" font-size="15">human approves risky</text>
+<text x="134.0" y="689.0" text-anchor="middle" font-size="15">actions</text>
+<rect x="308" y="614" width="220" height="100" rx="14" fill="#fbd9c0" stroke="#e0a57c" stroke-width="1.5"/>
+<text x="418.0" y="649.0" text-anchor="middle" font-size="15" font-weight="700">7. Verdict check</text>
+<text x="418.0" y="669.0" text-anchor="middle" font-size="15">weak or hijacked verdicts</text>
+<text x="418.0" y="689.0" text-anchor="middle" font-size="15">go to a human</text>
+<rect x="592" y="614" width="220" height="100" rx="14" fill="#cfe2f7" stroke="#7ea6d3" stroke-width="1.5"/>
+<text x="702.0" y="649.0" text-anchor="middle" font-size="15" font-weight="700">8. Report</text>
+<text x="702.0" y="669.0" text-anchor="middle" font-size="15">where the alert came from</text>
+<text x="702.0" y="689.0" text-anchor="middle" font-size="15">(planned)</text>
+<rect x="876" y="614" width="220" height="100" rx="14" fill="#cfe2f7" stroke="#7ea6d3" stroke-width="1.5"/>
+<text x="986.0" y="659.0" text-anchor="middle" font-size="15" font-weight="700">9. Save</text>
+<text x="986.0" y="679.0" text-anchor="middle" font-size="15">case memory and audit log</text>
+<line x1="244" y1="274.0" x2="305" y2="274.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="528" y1="274.0" x2="589" y2="274.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="812" y1="274.0" x2="873" y2="274.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="1096" y1="274.0" x2="1157" y2="274.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="986.0" y1="324" x2="986.0" y2="397" stroke="#3b3a36" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ah)"/>
+<line x1="244" y1="664.0" x2="305" y2="664.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="528" y1="664.0" x2="589" y2="664.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="812" y1="664.0" x2="873" y2="664.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+</svg>

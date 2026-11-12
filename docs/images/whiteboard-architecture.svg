@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-40 -30 1560 768" font-family="Helvetica, Arial, sans-serif" fill="#22211e">
+<rect x="-40" y="-30" width="1560" height="768" fill="#ffffff"/>
+<defs><marker id="ah" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#3b3a36"/></marker></defs>
+<rect x="0" y="180" width="1480" height="148" rx="18" fill="#fafaf7" stroke="#c9c7bf" stroke-width="1.5"/>
+<text x="4" y="170" font-size="16" font-weight="700" fill="#55534d">Investigation flow</text>
+<rect x="0" y="380" width="1480" height="128" rx="18" fill="#fafaf7" stroke="#c9c7bf" stroke-width="1.5"/>
+<text x="4" y="370" font-size="16" font-weight="700" fill="#55534d">Guardrails</text>
+<rect x="0" y="560" width="1480" height="148" rx="18" fill="#fafaf7" stroke="#c9c7bf" stroke-width="1.5"/>
+<text x="4" y="550" font-size="16" font-weight="700" fill="#55534d">Roadmap</text>
+<text x="0" y="46" font-size="46" font-weight="700">Multi-tool security agent</text>
+<text x="0" y="106" font-size="26">One guarded agent reaches every security tool through MCP.</text>
+<rect x="24" y="204" width="200" height="100" rx="14" fill="#f1f0ec" stroke="#b9b7b0" stroke-width="1.5"/>
+<text x="124.0" y="259.0" text-anchor="middle" font-size="15">Alert or question</text>
+<rect x="288" y="204" width="200" height="100" rx="14" fill="#cfe2f7" stroke="#7ea6d3" stroke-width="1.5"/>
+<text x="388.0" y="259.0" text-anchor="middle" font-size="15">Agent loop (Claude)</text>
+<rect x="552" y="204" width="200" height="100" rx="14" fill="#cfe2f7" stroke="#7ea6d3" stroke-width="1.5"/>
+<text x="652.0" y="259.0" text-anchor="middle" font-size="15">Domain router</text>
+<rect x="816" y="204" width="200" height="100" rx="14" fill="#cfe2f7" stroke="#7ea6d3" stroke-width="1.5"/>
+<text x="916.0" y="259.0" text-anchor="middle" font-size="15">MCP hub</text>
+<rect x="1080" y="204" width="376" height="100" rx="14" fill="#cfe8d4" stroke="#7fb98a" stroke-width="1.5"/>
+<text x="1268.0" y="239.0" text-anchor="middle" font-size="15" font-weight="700">Security tools over MCP</text>
+<text x="1268.0" y="259.0" text-anchor="middle" font-size="15">EDR, SIEM, vulnerability, cloud, email, data,</text>
+<text x="1268.0" y="279.0" text-anchor="middle" font-size="15">identity, network</text>
+<rect x="24" y="404" width="337" height="80" rx="14" fill="#fbd9c0" stroke="#e0a57c" stroke-width="1.5"/>
+<text x="192.5" y="449.0" text-anchor="middle" font-size="15">Pin and scan tool descriptions</text>
+<rect x="385" y="404" width="337" height="80" rx="14" fill="#fbd9c0" stroke="#e0a57c" stroke-width="1.5"/>
+<text x="553.5" y="449.0" text-anchor="middle" font-size="15">Treat tool output as untrusted data</text>
+<rect x="746" y="404" width="340" height="80" rx="14" fill="#fbd9c0" stroke="#e0a57c" stroke-width="1.5"/>
+<text x="916.0" y="449.0" text-anchor="middle" font-size="15">Policy gate: unclassified tools denied</text>
+<rect x="1110" y="404" width="346" height="80" rx="14" fill="#fbd9c0" stroke="#e0a57c" stroke-width="1.5"/>
+<text x="1283.0" y="449.0" text-anchor="middle" font-size="15">Human approval, audit log, kill switch</text>
+<rect x="24" y="584" width="185" height="100" rx="14" fill="#f1f0ec" stroke="#b9b7b0" stroke-width="1.5"/>
+<text x="116.5" y="629.0" text-anchor="middle" font-size="15">1. Refactor tool</text>
+<text x="116.5" y="649.0" text-anchor="middle" font-size="15">interface</text>
+<rect x="273" y="584" width="185" height="100" rx="14" fill="#f1f0ec" stroke="#b9b7b0" stroke-width="1.5"/>
+<text x="365.5" y="629.0" text-anchor="middle" font-size="15">2. MCP hub and mock</text>
+<text x="365.5" y="649.0" text-anchor="middle" font-size="15">servers</text>
+<rect x="522" y="584" width="185" height="100" rx="14" fill="#f1f0ec" stroke="#b9b7b0" stroke-width="1.5"/>
+<text x="614.5" y="619.0" text-anchor="middle" font-size="15">3. CrowdStrike and</text>
+<text x="614.5" y="639.0" text-anchor="middle" font-size="15">Google SecOps, read-</text>
+<text x="614.5" y="659.0" text-anchor="middle" font-size="15">only</text>
+<rect x="771" y="584" width="185" height="100" rx="14" fill="#f1f0ec" stroke="#b9b7b0" stroke-width="1.5"/>
+<text x="863.5" y="619.0" text-anchor="middle" font-size="15">4. Rapid7 and Wiz,</text>
+<text x="863.5" y="639.0" text-anchor="middle" font-size="15">first cross-tool</text>
+<text x="863.5" y="659.0" text-anchor="middle" font-size="15">playbook</text>
+<rect x="1020" y="584" width="185" height="100" rx="14" fill="#f1f0ec" stroke="#b9b7b0" stroke-width="1.5"/>
+<text x="1112.5" y="629.0" text-anchor="middle" font-size="15">5. Email, data,</text>
+<text x="1112.5" y="649.0" text-anchor="middle" font-size="15">identity, network</text>
+<rect x="1269" y="584" width="185" height="100" rx="14" fill="#f1f0ec" stroke="#b9b7b0" stroke-width="1.5"/>
+<text x="1361.5" y="629.0" text-anchor="middle" font-size="15">6. Real actions with</text>
+<text x="1361.5" y="649.0" text-anchor="middle" font-size="15">approvals</text>
+<line x1="224" y1="254.0" x2="285" y2="254.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="488" y1="254.0" x2="549" y2="254.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="752" y1="254.0" x2="813" y2="254.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="1016" y1="254.0" x2="1077" y2="254.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="916.0" y1="304" x2="916.0" y2="401" stroke="#3b3a36" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ah)"/>
+<line x1="209" y1="634.0" x2="270" y2="634.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="458" y1="634.0" x2="519" y2="634.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="707" y1="634.0" x2="768" y2="634.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="956" y1="634.0" x2="1017" y2="634.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="1205" y1="634.0" x2="1266" y2="634.0" stroke="#3b3a36" stroke-width="2" marker-end="url(#ah)"/>
+</svg>

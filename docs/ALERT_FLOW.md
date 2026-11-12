@@ -3,6 +3,10 @@
 Every alert ends with a verdict, a report and a saved case. Steps marked *planned* are on the
 [roadmap](ARCHITECTURE.md#roadmap) and not built yet.
 
+![Whiteboard: how the agent handles an alert](images/whiteboard-alert-flow.svg)
+
+The same flow as a text diagram:
+
 ```mermaid
 flowchart LR
     subgraph INV["Investigate"]
