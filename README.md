@@ -142,6 +142,8 @@ Only send real security data to an external AI API if your organization's policy
 
 ## Roadmap
 
+The full design is in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), and the path of a single alert is in [docs/ALERT_FLOW.md](docs/ALERT_FLOW.md).
+
 - Connect security tools through MCP servers (EDR, SIEM, vulnerability management, cloud, email, data, identity, network) behind a policy file
 - Active Directory / Entra ID and asset inventory lookups
 - Per-investigation reports showing where each alert came from, pushed to ticketing or chat
