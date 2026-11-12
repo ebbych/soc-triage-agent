@@ -1,0 +1,25 @@
+{
+  "alert_id": "ENTRA-rsk-5c20e9",
+  "source": "entra_id_protection",
+  "title": "Impossible travel sign-in",
+  "description": "User asmith signed in from two countries 43 minutes apart.",
+  "severity": "medium",
+  "timestamp": "2026-11-04T13:48:10Z",
+  "entities": {
+    "hosts": [],
+    "users": [
+      "asmith"
+    ],
+    "ips": [
+      "192.0.2.146"
+    ],
+    "domains": []
+  },
+  "raw": {
+    "risk_level": "medium",
+    "first_location": "Austin, US",
+    "second_location": "Frankfurt, DE",
+    "minutes_apart": 43,
+    "second_device_managed": false
+  }
+}

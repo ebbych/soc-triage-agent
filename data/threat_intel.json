@@ -3,10 +3,19 @@
     "185.220.101.47": {"risk_score": 92, "category": "c2_infrastructure", "first_seen": "2026-09-30", "sources": ["internal_feed", "abuse_reports"], "notes": "Associated with a commodity botnet C2 cluster."},
     "198.51.100.23": {"risk_score": 88, "category": "c2_infrastructure", "first_seen": "2026-10-19", "sources": ["vendor_feed"], "notes": "HTTPS C2 used by a loader family seen in recent intrusions."},
     "203.0.113.77": {"risk_score": 65, "category": "scanner", "first_seen": "2026-08-02", "sources": ["abuse_reports"], "notes": "Probes web applications across many organizations. Not tied to a known actor."},
-    "10.20.5.14": {"risk_score": 0, "category": "internal_vpn_pool", "notes": "Corporate VPN address range."}
+    "10.20.5.14": {"risk_score": 0, "category": "internal_vpn_pool", "notes": "Corporate VPN address range."},
+    "10.20.9.50": {"risk_score": 0, "category": "approved_internal_scanner", "notes": "Address of vulnscan-01, the authorized vulnerability scanner."},
+    "192.0.2.146": {"risk_score": 30, "category": "commercial_vpn", "first_seen": "2026-05-11", "sources": ["vendor_feed"], "notes": "Exit node of a consumer VPN service. Used by ordinary travellers and by attackers alike."},
+    "203.0.113.200": {"risk_score": 80, "category": "exploit_scanner", "first_seen": "2026-10-29", "sources": ["vendor_feed", "abuse_reports"], "notes": "Seen sending exploit payloads for edge-device vulnerabilities."},
+    "198.51.100.88": {"risk_score": 55, "category": "anonymous_hosting", "first_seen": "2026-07-19", "sources": ["abuse_reports"], "notes": "Low-cost hosting provider with mixed reputation. Hosts legitimate sites and some abuse."}
   },
   "domains": {
     "update-cdn-sync.xyz": {"risk_score": 95, "category": "c2_domain", "registered": "2026-10-20", "notes": "Newly registered, DGA-like naming, resolves to known C2 infrastructure."},
-    "telemetry-ms-update.top": {"risk_score": 90, "category": "c2_domain", "registered": "2026-10-18", "notes": "Impersonates Microsoft telemetry. Not owned by Microsoft."}
+    "telemetry-ms-update.top": {"risk_score": 90, "category": "c2_domain", "registered": "2026-10-18", "notes": "Impersonates Microsoft telemetry. Not owned by Microsoft."},
+    "secure-payro11-portal.com": {"risk_score": 85, "category": "phishing", "registered": "2026-11-01", "notes": "Look-alike payroll login page (digit 1 in place of letter l). Reported by several organizations."},
+    "hartwell-audit.com": {"risk_score": 5, "category": "business_partner", "registered": "2011-03-08", "notes": "External audit firm on the approved-partner list."}
+  },
+  "hashes": {
+    "bd610084be74dff0f2ea936092a0cda8fbdf7860653c265a5bb58d2bea1e56f5": {"risk_score": 96, "category": "ransomware_loader", "first_seen": "2026-10-30", "sources": ["vendor_feed"], "notes": "Loader that downloads a ransomware payload. Commonly delivered as a fake invoice attachment."}
   }
 }

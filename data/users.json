@@ -1,4 +1,9 @@
 {
   "jdoe": {"department": "Finance", "title": "Financial Analyst", "mfa_enrolled": true, "manager": "asmith", "criticality": "medium"},
-  "svc-adsync": {"department": "IT", "title": "Directory sync service account", "mfa_enrolled": false, "criticality": "critical"}
+  "svc-adsync": {"department": "IT", "title": "Directory sync service account", "mfa_enrolled": false, "criticality": "critical"},
+  "mkhan": {"department": "Sales", "title": "Account Executive", "mfa_enrolled": true, "manager": "bpatel", "criticality": "low"},
+  "asmith": {"department": "Finance", "title": "Finance Manager", "mfa_enrolled": true, "manager": "cfo", "criticality": "high"},
+  "tnguyen": {"department": "Human Resources", "title": "Payroll Specialist", "mfa_enrolled": true, "manager": "hr-director", "criticality": "medium"},
+  "rlopez": {"department": "Finance", "title": "Senior Accountant", "mfa_enrolled": true, "manager": "asmith", "criticality": "medium"},
+  "svc-deploy": {"department": "IT", "title": "Deployment service account", "mfa_enrolled": false, "criticality": "medium"}
 }

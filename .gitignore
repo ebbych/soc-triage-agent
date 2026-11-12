@@ -5,3 +5,5 @@ __pycache__/
 .env
 logs/
 KILL_SWITCH
+memory/
+data/kev_catalog.json
